@@ -11,7 +11,7 @@ CODE_ENV_MAP = {
     'py39': 'py312'
 }
 
-PROJECT_ID = 'DKU_TUT_APIS_1'       # specify the project ID to update
+PROJECT_ID = 'CHANGE_ME'            # specify the project ID to update
 UPDATE_PROJECT_ENV = False          # if True, update the project level ENV
 INHERIT_PROJECT_ENV = False         # set all code recipes to inherit the project ENV
 USE_STATIC_ENV = False              # use a static ENV mode, not the CODE_ENV_MAP
