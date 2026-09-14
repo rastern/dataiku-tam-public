@@ -2,22 +2,22 @@ import dataiku
 
 client = dataiku.api_client()
 
-connection_name = "aws_iceberg_glue_conn"
-connection_type = "Iceberg"
-
-connection_params = {
-    "catalogType": "Glue",             # Options: 'Glue', 'REST', etc.
-    "glueId": "123456789012",          # Your AWS Account ID
-    "warehouse": "s3://my-iceberg-warehouse-bucket/path",
-    "region": "us-east-1",             # Your AWS Region
-    "authType": "default"              # Or explicit AWS keys/profile if needed
+iceberg_params = {
+    "catalogType": "REST",                   # Options include: REST, GLUE, SNOWFLAKE, NESSIE, HIVE, HADOOP
+    "catalogUri": "https://your-iceberg-catalog-uri/v1",
+    "warehouse": "s3a://your-bucket/path/to/warehouse",
+    
+    # Example of nested authentication or storage properties if required by your setup
+    "properties": [
+        {"name": "header.X-Catalog-Auth", "value": "your-auth-token"}
+    ]
 }
 
 new_connection = client.create_connection(
-    name=connection_name,
-    type=connection_type,
-    params=connection_params,
-    usable_by="ALL"                    # Or use 'ALLOWED' with 'allowed_groups'
+    name="my_iceberg_connection",
+    type="Iceberg",
+    params=iceberg_params,
+    usable_by="ALL" # Can also be 'ALLOWED' if restricting to 'allowed_groups'
 )
 
-print(f"Successfully created Iceberg connection: {connection_name}")
+print("Iceberg connection created successfully!")
